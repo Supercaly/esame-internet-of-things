@@ -1,6 +1,8 @@
 #ifndef MULTIPLEXER_H
 #define MULTIPLEXER_H
 
+#include "analog_sensor.h"
+
 #include "Arduino.h"
 
 // Class for driving the CD74HC4067 16-channel analog multiplexer
@@ -12,11 +14,11 @@ public:
     Multiplexer(int en, int sig, int s0, int s1, int s2);
     ~Multiplexer();
 
-    // Setup the multiplexer 
+    // Setup the multiplexer
     void begin();
 
     // Read the analog input from sensor at given index
-    int read_analog(int idx);
+    Analog_Sensor_t read_analog(int idx);
 
 private:
     int _en;
