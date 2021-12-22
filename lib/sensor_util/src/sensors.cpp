@@ -15,11 +15,16 @@ bool Sensors::begin()
 
 void Sensors::read()
 {
-    rain_meter = _mpx.read_analog(RAIN_METER);
-    igrometer = _mpx.read_analog(IGROMETER);
-    mq2 = _mpx.read_analog(MQ2);
-    mq135 = _mpx.read_analog(MQ135);
-    ldr = _mpx.read_analog(PHOTORESITOR);
+    rain_meter.raw = _mpx.read_analog(RAIN_METER);
+    rain_meter.percent = map(rain_meter.raw, 0, 1024, 100, 0);
+    igrometer.raw = _mpx.read_analog(IGROMETER);
+    igrometer.percent = map(igrometer.raw, 0, 1024, 100, 0);
+    mq2.raw = _mpx.read_analog(MQ2);
+    mq2.percent = map(mq2.raw, 0, 1024, 0, 100);
+    mq135.raw = _mpx.read_analog(MQ135);
+    mq135.percent = map(mq135.raw, 0, 1024, 0, 100);
+    ldr.raw = _mpx.read_analog(PHOTORESITOR);
+    ldr.percent = map(ldr.raw, 0, 1024, 0, 100);
 
     temperature = _dht.readTemperature();
     humidity = _dht.readHumidity();

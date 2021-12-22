@@ -6,19 +6,11 @@
 #include <multiplexer.h>
 #include <sensors.h>
 #include <status_led.h>
+#include <constants.h>
 
 // deep sleep time
-#define DEEP_SLEEP_TIME_SEC 900 // 15 min
-
-// WiFi Connection
-#define WIFI_SSID "MartinRouterKing"
-#define WIFI_PWD "mpvgfee4gff"
-
-// Influx db config
-#define INFLUXDB_URL "http://93.186.254.118:8086"
-#define INFLUXDB_ORG "uniurb"
-#define INFLUXDB_BUCKET "test"
-#define INFLUXDB_TOKEN "7q44Rz0f0IZYM4SYguqyPB5RPafXPEagZUpRuIUBp3aoDT3HVQzFg5c0Hg_RY8Khk8cH8MjuApdyQsKrFyaF4w=="
+#define DEEP_SLEEP_TIME_MIN 15
+#define DEEP_SLEEP_TIME_US DEEP_SLEEP_TIME_MIN * 60 * 1e6
 
 Sensors sensors;
 Status_Led led;
@@ -27,7 +19,7 @@ InfluxDBClient influxdb_client(INFLUXDB_URL,
                                INFLUXDB_BUCKET,
                                INFLUXDB_TOKEN,
                                InfluxDbCloud2CACert);
-Point influxdb_sensors("data_calisti");
+Point influxdb_sensors(INFLUXDB_MEAS);
 
 void setup()
 {
@@ -78,7 +70,7 @@ void loop()
     write_to_influxdb(&sensors);
 
     // Put the ESP in deep sleep
-    ESP.deepSleep(DEEP_SLEEP_TIME_SEC * 1e6);
+    ESP.deepSleep(DEEP_SLEEP_TIME_US);
 }
 
 // Write the data from all sensors to InfluxDB

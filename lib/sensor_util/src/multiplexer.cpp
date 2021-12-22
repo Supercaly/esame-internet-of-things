@@ -17,10 +17,8 @@ void Multiplexer::begin()
     pinMode(_s2, OUTPUT);
 }
 
-Analog_Sensor_t Multiplexer::read_analog(int idx)
+int Multiplexer::read_analog(int idx)
 {
-    Analog_Sensor_t result;
-
     // Set the s bits to the correct position
     digitalWrite(_s0, (idx & (1 << 0)) >> 0 ? HIGH : LOW);
     digitalWrite(_s1, (idx & (1 << 1)) >> 1 ? HIGH : LOW);
@@ -32,8 +30,7 @@ Analog_Sensor_t Multiplexer::read_analog(int idx)
     delay(10);
 
     // read the analog input
-    result.raw = analogRead(_sig);
-    result.percent = map(result.raw, 0, 1024, 0, 100);
+    int result = analogRead(_sig);
 
     // disable multiplexer
     digitalWrite(_en, HIGH);
