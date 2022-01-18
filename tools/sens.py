@@ -121,6 +121,11 @@ def upload_data(data_line, dataset):
     else:
         print('Failed to upload file to Edge Impulse', res.status_code, res.content)
 
+def batch_upload(data, dataset):
+    for idx, d in enumerate(data):
+        upload_data(d, dataset)
+        print(f"[{idx}/{len(data)}]")
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(f"USAGE:", file=sys.stderr)
@@ -142,7 +147,10 @@ if __name__ == "__main__":
     random.shuffle(data)
     training_data = data[:percent]
     testing_data = data[percent:]
-
+    # Upload dataset to edge impulse
+    batch_upload(training_data, "training")
+    batch_upload(testing_data, "testing")
+    #[upload_data(d, "testing") for d in testing_data]
     #[upload_data(d, "training") for d in data[:5]]
     
     with open(train_out_path, "w+") as of:
