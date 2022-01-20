@@ -7,3 +7,5 @@ build/
 iot_inferencing/
 
 __pycache__/
+
+*.csv
