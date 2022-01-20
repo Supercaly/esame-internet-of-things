@@ -76,7 +76,7 @@ void loop()
     } else 
     {
         // Write sensors to InfluxDb
-        write_to_influxdb(anomaly_score);
+        write_to_influxdb(&sensors, anomaly_score);
     }
 
     // Put the ESP in deep sleep
@@ -121,11 +121,20 @@ int compute_anomaly(Sensors *s, float *score)
 }
 
 // Write the anomaly score to InfluxDB
-void write_to_influxdb(float s)
+void write_to_influxdb(Sensors *s, float a)
 {
     influxdb_sensors.clearFields();
 
-    influxdb_sensors.addField("anomaly_score", s);
+    influxdb_sensors.addField("anomaly_score", a);
+    influxdb_sensors.addField("temperature", s->temperature);
+    influxdb_sensors.addField("humidity", s->humidity);
+    influxdb_sensors.addField("rain_meter_percent", s->rain_meter.percent);
+    influxdb_sensors.addField("igrometer_percent", s->igrometer.percent);
+    influxdb_sensors.addField("ldr_percent", s->ldr.percent);
+    influxdb_sensors.addField("mq135_percent", s->mq135.percent);
+    influxdb_sensors.addField("pressure", s->pressure);
+    influxdb_sensors.addField("bmp_temperature", s->bmp_temperature);
+    influxdb_sensors.addField("altitude", s->altitude);
 
     Serial.print("Writing data to InfluxDb... ");
     if (influxdb_client.writePoint(influxdb_sensors))
