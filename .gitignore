@@ -1,11 +1,11 @@
 .vscode/
-
 .DS_Store
 
 build/
-
 iot_inferencing/
 
 __pycache__/
-
 *.csv
+
+*.log
+*.aux

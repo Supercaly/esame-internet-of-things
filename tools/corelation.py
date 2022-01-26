@@ -188,9 +188,9 @@ if __name__ == "__main__":
     print(f"")
 
     print(compute_cov_matrix(data))
-    # print("")
-    # for k1,v1 in data.items():
-    #     for k2,v2 in data.items():
-    #         cov,pcov,scov = compute_cov(v1,v2)
-    #         print(f"Covariance {k1},{k2}: {scov}")
-    # print("")
+    print("")
+    for k1,v1 in data.items():
+        for k2,v2 in data.items():
+            cov,pcov,scov = compute_cov(v1,v2)
+            print(f"Covariance {k1},{k2}: {pcov} {scov}")
+    print("")
