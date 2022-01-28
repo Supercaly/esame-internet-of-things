@@ -41,10 +41,10 @@ def merge(d):
         r[k[2]] = k[1]
     return r
 
-def create_data(input_path):
+def create_data(input_path, fil):
     data = []
     with open(input_path, "r") as f:
-        data = list(map(filter_fields,list(filter(filter_date,[merge(list(group[1])) for group in 
+        data = list(map(fil,list(filter(filter_date,[merge(list(group[1])) for group in 
             groupby(sorted([line.split(",")[5:] for line in 
                 (line_raw.rstrip("\n") for line_raw in 
                     f.readlines()[4:][:-2])], key=lambda x: x[0]), key=lambda x: x[0])]))))
