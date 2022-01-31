@@ -43,9 +43,9 @@ un cambio di mentalità da parte di tutte le industrie volto all'utilizzo di ene
 
 Secondo i maggiori esperti la tecnologia avrà un impatto decisivo nella vittoria di questa "guerra"; il suo ruolo è quello di supporto, ottimizzando i vecchi processi produttivi
 e aiutando nella scoperta di nuovi metodi di produzione più eco sostenibili con meno sprechi e consumi.
-Nel campo dell'agricoltura l'utilizzo della tecnologia come supporto alla produzione sta prendendo piede ormai da diversi anni, il problema principale è l'elevato costo che la rende accessibile solo da aziende di grandi dimensioni.
+Nel campo dell'agricoltura l'utilizzo della tecnologia come supporto alla produzione sta prendendo piede ormai da diversi anni, il problema principale è l'elevato costo che la rende accessibile solo ad aziende di grandi dimensioni.
 
-Il tipo di tecnologia più comune in ambiente agricolo è la "centralina meteo" posizionata fra i campi che consente di raccogliere continuamente dati sulle attuali condizioni atmosferiche e sulla qualità del terreno in modo
+Il tipo di tecnologia più comune in ambiente agricolo è la "centralina meteo" posizionata nei campi che consente di raccogliere continuamente dati sulle attuali condizioni atmosferiche e sulla qualità del terreno in modo
 da sapere quale sia il miglior momento per irrigare, riducendo lo spreco d'acqua, capire se è arrivato il momento del raccolto, evitando la raccolta di prodotti non ancora pronti, e addirittura prevedere piogge o 
 periodi di siccità futuri, in modo da prepararsi preventivamente ad essi.
 
@@ -58,14 +58,14 @@ mondo reale, le cose, con il mondo virtuale, la rete internet; il suo scopo è q
 
 La "Smart Box" IoT creata per questo progetto tiene bene a mente tutte queste idee; la sua funzionalità principale è quella di raccogliere dati sulla qualità dell'ambiente circostante in maniera continuativa per poi 
 elaborarli "sul posto" e rilevare eventuali anomalie che sono poi segnalate ad un sistema di monitoraggio remoto. Per fare questo si è partiti dalla progettazione e realizzazione del'hardware, per poi passare alla raccolta
-di i dati "raw" e finire con l'addestramento di un modello di Machine Learning in grado di rilevare le anomalie dai dati che è poi stato installato nella Smart Box.
+dei dati "raw" e finire con l'addestramento di un modello di Machine Learning in grado di rilevare le anomalie dai dati che è poi stato installato nella Smart Box.
 Di seguito vedremo più nel dettaglio tutte queste fasi con l'aggiunta di un analisi statistica sui dati raccolti inizialmente e sulle anomalie rilevate.
 
 \subsection*{Progettazione Smart Box}
 \vspace{0.5cm}
 
 La "Smart Box" IoT, come dice il suo nome, è una scatola intelligente, con al suo interno una serie di sensori e un MCU impostati per raccogliere i dati una volta ogni 15 minuti. L'intera scatola è stata progettata 
-per essere montata su un palo in modo da rimanere sempre sollevata dal terreno, il che è l'ideale per l'installazione in un campo dove, con la crescita delle colture, rischia di non essere più del tutto visibile.
+per essere montata su un supporto in modo da rimanere sempre sollevata dal terreno, il che è l'ideale per l'installazione in un campo dove, con la crescita delle colture, rischia di non essere più del tutto visibile.
 
 Vediamo ora nel dettaglio tutti i componenti presenti all'interno della "Smart Box". Il più importante è senza dubbio l'MCU ESP8266, è il cuore dell'intero sistema, un chip a basso costo con Wi-Fi integrato e diversi pin
 GPIO, molto popolare nelle applicazioni IoT.
@@ -144,7 +144,7 @@ creati per gestire questo tipo di dato molto comune nell'ambiente IoT.
 
 Una volta realizzata la Smart Box si è deciso di posizionarla in una parte di giardino adibita ad orto nelle vicinanze di casa mia, Figura \ref{fig:inplace}, questo posto è perfetto poiché è molto simile ad un campo agricolo, 
 inoltre è abbastanza vicino da collegarsi alla rete WiFi di casa senza aver bisogno di particolari antenne per estendere il segnale. 
-Una volta nella sua posizione definitiva la raccolta dei dati può aver inizio; il periodo di raccolta va dal giorno 23/12/2021 al giorno il 17/01/2022, per un totale di 25 giorni che, con la frequenza di un campione 
+Una volta nella sua posizione definitiva la raccolta dei dati può aver inizio; il periodo di raccolta va dal giorno 23/12/2021 al giorno 17/01/2022, per un totale di 25 giorni che, con la frequenza di un campione 
 ogni 15 minuti, ha prodotto all'incirca 2400 campioni singoli.
 
 \subsection*{Analisi dei dati}
@@ -217,9 +217,9 @@ Nella Figura \ref{fig:plots} possiamo vedere alcuni grafici ottenuti applicando 
 Un ulteriore analisi che si può svolgere è dividere l'intero dataset nei campioni raccolti durante il giorno e quelli durante la notte filtrando i dati a seconda del valore di LDR. 
 Otteniamo 919 campioni durante il giorno (\textasciitilde39\%) e 1448 di notte (\textasciitilde61\%); la Tabella \ref{tab:daynight} riporta la media per ogni sensore.
 
-Si può vedere che la maggior parte dei sensori non variano di molto fra notte e giorno, mentre temperatura, umidità e ldr cambiano radicalmente; come aspettato il valore medio 
+Si può vedere che la maggior parte dei sensori non variano di molto fra notte e giorno, mentre temperatura, umidità e ldr cambiano radicalmente; come previsto il valore medio 
 del sensore di luminosità durante il giorno è \textasciitilde96\% mentre durante la notte è \textasciitilde1\%, stessa cosa avviene con la temperatura, che durante la notte è \textasciitilde4°C, mentre di 
-giorno aumenta fino a \textasciitilde9°C. Il valore dell'umidità invece aumenta di notte e diminuisce il giorno (da \textasciitilde80\% a \textasciitilde86\%); in seguito approfondiremo questo fenomeno parlando 
+giorno aumenta fino a \textasciitilde9°C. Il valore dell'umidità invece aumenta di notte e diminuisce di giorno (da \textasciitilde86\% a \textasciitilde80\%); in seguito approfondiremo questo fenomeno parlando 
 della correlazione fra umidità e temperatura.
 
 Nella sezione precedente abbiamo analizzato i dati utilizzando i concetti statistici di base, ora invece calcoliamo le correlazioni fra i valori dei diversi sensori. Di seguito infatti si è deciso di calcolare 
@@ -252,7 +252,7 @@ alcuni valori particolarmente interessanti:
 \subsection*{Rilevazione anomalie}
 \vspace{0.5cm}
 
-Nelle sezioni precedenti abbiamo parlato della raccolta dei dati effettuata per 25 gironi consecutivi, inoltre abbiamo analizzato questi dati utilizzando i mezzi statistici; in questa sezione parliamo invece del passaggio 
+Nelle sezioni precedenti abbiamo parlato della raccolta dei dati effettuata per 25 giorni consecutivi, inoltre abbiamo analizzato questi dati utilizzando i mezzi statistici; in questa sezione parliamo invece del passaggio 
 successivo: il rilevamento delle anomalie. 
 
 Per rilevare le anomalie si è deciso di addestrare un modello di Machine Learning utilizzando Edge Impulse\cite{edgeimpulse}, una piattaforma specializzata nella creazione di reti neurali ottimizzate per i dispositivi edge dell'IoT che
@@ -297,11 +297,14 @@ Negli prossimi anni l'impiego della tecnologia avrà un ruolo fondamentale nella
 si vede un enorme potenziale nell'unione di tutte le apparecchiature di monitoraggio presenti nelle grandi aziende con i concetti dell'Internet of Things. 
 
 In questa relazione si è proposto lo sviluppo di una "Smart Box" IoT con lo scopo di raccogliere dati atmosferici da diversi sensori, calcolare le anomalie e segnalarle in un servizio situato sul cloud. 
-Il lavoro si è svolto in 4 fasi: la progettazione e realizzazione dell'hardware, la raccolta di dati per un periodo di 25 gironi con lo scopo di addestrare un modello di Machine Learning volto al rilevamento delle 
+Il lavoro si è svolto in 4 fasi: la progettazione e realizzazione dell'hardware, la raccolta di dati per un periodo di 25 giorni con lo scopo di addestrare un modello di Machine Learning volto al rilevamento delle 
 anomalie, la creazione del suddetto modello e il suo utilizzo per la raccolta di dati anomali durante un periodo di 7 giorni. 
 In aggiunta a queste fasi in questa relazione è stata proposta un'analisi statistica di base su tutti i dati raccolti in modo da comprendere meglio la loro composizione.
 
-
+Fra i potenziali sviluppi futuri vi è la possibilità di gestire l'invio dei dati e delle anomalie senza avere la necessità di connettersi ad una rete WiFi, ad esempio utilizzando una smart card SIM dedicata oppure 
+un ponte radio. Un altro ambito di miglioramento è l'aggiunta di sensori di diverso tipo, come ad esempio un anemometro per misurare la velocità del vento; inoltre è particolarmente interessante anche l'integrazione di 
+più di una "Smart Box" IoT allo stesso tempo collocate in parti diverse dell'azienda con la possibilità di comunicazione fra di loro. 
+Infine un aspetto da sviluppare ulteriormente è la durata della batteria, ottimizzando il power usage dei sensori o utilizzando direttamente delle batterie LiPo al posto di un power-bank.
 
 \printbibliography
 
