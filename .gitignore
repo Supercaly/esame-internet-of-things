@@ -13,3 +13,4 @@ __pycache__/
 *.bcf
 *.blg
 *.run.xml
+*.out
