@@ -39,8 +39,8 @@ def compute_cov_matrix(cov):
     l1 = list()
     for _,v1 in cov.items():
         l2 = list()
-        for _,v2 in data.items():
-            _,_,scov = compute_cov(v1,v2)
+        for _,v2 in cov.items():
+            _,pcov,scov = compute_cov(v1,v2)
             l2.append(scov)
         l1.append(l2)
     return np.matrix(l1)
@@ -90,17 +90,31 @@ if __name__ == "__main__":
         print(f"    mean: {np.mean(v)}, std: {np.std(v)}, median: {np.median(v)}, mode: {mode(v)}, min: {np.min(v)}, max: {np.max(v)}")
     print(f"")
 
-    covp = compute_cov_matrix(data)
+    
+    sorted_data = {}
+    sorted_data["temperature"] = data["temperature"]
+    sorted_data["bmp_temperature"] = data["bmp_temperature"]
+    sorted_data["humidity"] = data["humidity"]
+    sorted_data["ldr_percent"] = data["ldr_percent"]
+    sorted_data["igrometer_percent"] = data["igrometer_percent"]
+    sorted_data["rain_meter_percent"] = data["rain_meter_percent"]
+    sorted_data["mq135_percent"] = data["mq135_percent"]
+    sorted_data["pressure"] = data["pressure"]
+    sorted_data["altitude"] = data["altitude"]
+
+    covp = compute_cov_matrix(sorted_data)
     print(covp)
     print("")
-    for k1,v1 in data.items():
-        for k2,v2 in data.items():
+    for k1,v1 in sorted_data.items():
+        for k2,v2 in sorted_data.items():
             cov,pcov,scov = compute_cov(v1,v2)
             print(f"Covariance {k1},{k2}: {pcov} {scov}")
     print("")
 
-    labels = ["DHT11 temp.", "umidità", "pioggia%", "igro.%", "LDR%", "MQ-135%", "press.", "BMP180 temp.", "alt."]
+    labels = ["DHT11 temp.","BMP180 temp.","umidità","LDR%","igro.%","pioggia%","MQ-135%","press.","alt."]
     print(labels)
+    print(sorted_data.keys())
+    
     sns.heatmap(covp, cbar=True, annot=True, square=True, cmap='coolwarm',
         xticklabels=labels, yticklabels=labels)
     pyplot.tight_layout()

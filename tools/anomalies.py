@@ -38,7 +38,7 @@ if __name__ == "__main__":
     day_len = len(day_anomaly["temperature"])
     
     print(f"")
-    print(f"Anomalies: {anomaly_len}({(anomaly_len*100)/total_len}%)")
+    print(f"Anomalies: {anomaly_len}/{total_len}({(anomaly_len*100)/total_len}%)")
     print(f"Anomalies day: {day_len}({(day_len*100)/anomaly_len}%) night: {anomaly_len-day_len}({((anomaly_len-day_len)*100)/anomaly_len}%)")
     print(f"")
 
