@@ -9,3 +9,7 @@ __pycache__/
 
 *.log
 *.aux
+*.bbl
+*.bcf
+*.blg
+*.run.xml
