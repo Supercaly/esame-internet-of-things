@@ -5,6 +5,8 @@ This repository contains the final project for the IoT exam.
 
 ## Quick Start
 
+Note: This repository uses git lfs to store images and pdfs with big sizes, [install it](https://git-lfs.github.com/) before cloning the repository to make sure all the files are properly downloaded.
+
 Before compiling the projects you need to tell arduino the location of the custom library; to do so create a symbolic link to the library in the arduino folder
 
 ```console
@@ -28,4 +30,4 @@ $ unzip iot_inferencing.zip -d path/to/arduino/libraries
 
 ## More info
 
-For more info about this project please read this [report](https://github.com/Supercaly/smart_sense/blob/master/relazione.pdf)
+For more info about this project please read this [report](https://github.com/Supercaly/smart_sense/blob/master/relazione.pdf) or his [paper](https://github.com/Supercaly/smart_sense/blob/master/paper.pdf) version.
