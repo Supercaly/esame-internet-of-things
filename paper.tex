@@ -1,4 +1,4 @@
-\documentclass[fleqn, 12pt]{SelfArx}
+\documentclass[fleqn, 10pt]{SelfArx}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
@@ -6,7 +6,7 @@
 \usepackage{csquotes}
 \usepackage{subcaption}
 \usepackage{graphicx}
-\usepackage{biblatex}
+%\usepackage{biblatex}
 \usepackage{url}
 
 \setlength{\columnsep}{0.55cm} % Distance between the two columns of text
@@ -29,10 +29,9 @@
 	pdfauthor={Lorenzo Calisti},
 }
 
-\addbibresource{relazione.bib}
 
-\JournalInfo{Programmazione per l'IoT - Laurea Magistrale in Informatica Applicata - DiSPeA - Università degli Studi di Urbino Carlo Bo} % Journal information
-\Archive{Data di pubblicazione xx/xx/xxxx - DOI: xxxx/xxxxxxx} % Informazioni che verranno inserite dal Docente in fase di pubblicazione
+\JournalInfo{Programmazione per l'IoT - Laurea Magistrale in Informatica Applicata - Università degli Studi di Urbino Carlo Bo} % Journal information
+\Archive{Data di pubblicazione 10/02/2022 - DOI: \href{https://doi.org/10.5281/zenodo.6036183}{10.5281/zenodo.6036183}} % Informazioni che verranno inserite dal Docente in fase di pubblicazione
 
 \PaperTitle{Smart Box IoT} % Article title
 
@@ -125,7 +124,7 @@ utilizzando Fritzing\cite{fritzing}: un programma open source per la progettazio
 \begin{figure}[htb]
   \centering
   \subcaptionbox{Vista della scatola}{\includegraphics[scale=0.25]{hardware/smart_box.pdf}}
-  \subcaptionbox{Vista della scatola + supporto}{\includegraphics[scale=0.25]{hardware/smart_box_complete.pdf}}
+  %\subcaptionbox{Vista della scatola + supporto}{\includegraphics[scale=0.25]{hardware/smart_box_complete.pdf}}
   \caption{Modelli 3D della Smart Box}
   \label{fig:models}
 \end{figure}
@@ -155,88 +154,90 @@ disattivati completamente (a parte un circuito interno all'ESP usato per il risv
 Come detto precedentemente i dati raccolti dalla Smart Box sono caricati sul cloud utilizzando il servizio InfluxBD, un database open-source per serie temporali che offre strumenti di raccolta e analisi appositamente 
 creati per gestire questo tipo di dato molto comune nell'ambiente IoT.
 
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.05]{assets/IMG_20211222_112505.jpg}
-\caption{Smart Box nella sua posizione finale}
-\label{fig:inplace}
-\end{figure}
+%\begin{figure}[htb]
+%\centering
+%\includegraphics[scale=0.05]{assets/IMG_20211222_112505.jpg}
+%\caption{Smart Box nella sua posizione finale}
+%\label{fig:inplace}
+%\end{figure}
 
-Una volta realizzata la Smart Box si è deciso di posizionarla in una parte di giardino adibita ad orto nelle vicinanze di casa mia, Figura \ref{fig:inplace}, questo posto è perfetto poiché è molto simile ad un campo agricolo, 
+Una volta realizzata la Smart Box si è deciso di posizionarla in una parte di giardino adibita ad orto nelle vicinanze di casa mia, questo posto è perfetto poiché è molto simile ad un campo agricolo, 
 inoltre è abbastanza vicino da collegarsi alla rete WiFi di casa senza aver bisogno di particolari antenne per estendere il segnale. 
 Una volta nella sua posizione definitiva la raccolta dei dati può aver inizio; il periodo di raccolta va dal giorno 23/12/2021 al giorno 17/01/2022, per un totale di 25 giorni che, con la frequenza di un campione 
 ogni 15 minuti, ha prodotto all'incirca 2400 campioni singoli.
 
 \section{Analisi dei dati}
 
-\begin{table*}[htb]
+\begin{table}[htb]
   \centering
+  \small
   \begin{tabular}{ l l l l l }
     \hline
     & media & std & mediana & moda (n.) \\
     \hline
-    temperatura DHT11 & 6.17 & 4.69 & 6.0 & 4.0 (216) \\
-    temperatura BMP180 & 5.87 & 6.29 & 4.9 & 4.5 (29) \\
-    umidità & 83.87 & 9.72 & 87.0 & 88.0 (856) \\
-    LDR\% & 38.08 & 46.91 & 0.0 & 0.0 (1319) \\
-    pioggia\% & 14.13 & 28.41 & 1.0 & 1.0 (1754) \\
-    igrometro\% & 53.42 & 15.81 & 57.0 & 58.0 (187) \\
-    MQ-135\% & 8.32 & 1.65 & 8.0 & 8.0 (1672) \\
-    pressione & 96357.00 & 845.43 & 96376.0 & 95411.0 (6) \\
-    altitudine & 423.11 & 73.31 & 421.21 & 354.49 (7) \\
+    T-DHT11 & 6.17 & 4.69 & 6.0 & 4.0 (216) \\
+    T-BMP180 & 5.87 & 6.29 & 4.9 & 4.5 (29) \\
+    Umidità & 83.87 & 9.72 & 87.0 & 88.0 (856) \\
+    Luminosità & 38.08 & 46.91 & 0.0 & 0.0 (1319) \\
+    Pioggia & 14.13 & 28.41 & 1.0 & 1.0 (1754) \\
+    Igrometro & 53.42 & 15.81 & 57.0 & 58.0 (187) \\
+    Q.Aria & 8.32 & 1.65 & 8.0 & 8.0 (1672) \\
+    Pressione & 964 & 845 & 964 & 954 (6) \\
+    Altitudine & 423.11 & 73.31 & 421.21 & 354.49 (7) \\
     \hline
   \end{tabular}
   \caption{ Valori statistici ricavati da ogni sensore }
   \label{tab:all_data_stats}
-\end{table*}
+\end{table}
 
 I dati raccolti sono stati elaborati in parte utilizzando il sistema di query nativo di InfluxDB\cite{flux} ed in parte con uno script python\cite{python}.
 
 Guardando la Tabella \ref{tab:all_data_stats} possiamo vedere diversi fenomeni interessanti: innanzitutto la temperatura media rilevata dal sensore DHT11 e quella rilevata da BMP180 sono molto simili, 
-questo ci da conferma del corretto funzionamento dei due sensori. Come seconda cosa notiamo che la media del sensore LDR è del 38\% poiché, essendo inverno durante il periodo di raccolta dati, 
-ci sono state più ore di buio che di luce. Analizzando il sensore di gas MQ-135 si nota che il suo valore medio, mediano e modale è all'incirca di 8\%, con una variazione del 1.6\%, questo indica 
+questo ci da conferma del corretto funzionamento dei due sensori. Come seconda cosa notiamo che la media della luminosità è del 38\% poiché, essendo inverno durante il periodo di raccolta dati, 
+ci sono state più ore di buio che di luce. Analizzando i dati provenienti dal sensore di gas MQ-135 (Q.Aria) si nota che il suo valore medio, mediano e modale è all'incirca di 8\%, con una variazione del 1.6\%, questo indica 
 che durante l'intero periodo di misurazione la qualità dell'aria è rimasta sempre all'incirca costante. Se confrontiamo i valori ricavati dal sensore di pioggia con quelli dell'igrometro possiamo vedere 
 come il valore medio della pioggia sia del \textasciitilde14\%, mentre il valore dell'igrometro del
 \textasciitilde53\% indicando che durante il periodo di misurazione ci sono state poche precipitazioni ed il terreno è rimasto mediamente umido. Infine vediamo che la percentuale media dell'umidità è 
 del 83\% con una deviazione standard del \textasciitilde9\% ovvero durante l'intero periodo di misurazione l'umidità è rimasta pressoché costante.
 
-\begin{figure}[htb]
+\begin{figure*}[htb]
   \centering
-  \subcaptionbox{sensori di temperatura DHT11 e BMP180}{\includegraphics[scale=0.22]{assets/mean_dht_bmp_temp.png}}
-  \subcaptionbox{sensore umidità}{\includegraphics[scale=0.22]{assets/mean_hum.png}}
-  \subcaptionbox{sensore LDR}{\includegraphics[scale=0.22]{assets/mean_ldr.png}}
-  \subcaptionbox{sensori di pioggia e igrometro}{\includegraphics[scale=0.22]{assets/mean_igro_rain.png}}
-  \caption{Grafici con le medie giornaliere di alcuni sensori}
+  \subcaptionbox{Sensori temperatura DHT11 e BMP180}{\includegraphics[scale=0.22]{assets/mean_dht_bmp_temp.png}}
+  \subcaptionbox{Sensore umidità}{\includegraphics[scale=0.22]{assets/mean_hum.png}} \\
+  \subcaptionbox{Sensore luminosità}{\includegraphics[scale=0.22]{assets/mean_ldr.png}}
+  \subcaptionbox{Sensori di pioggia e igrometro}{\includegraphics[scale=0.22]{assets/mean_igro_rain.png}}
+  \caption{Grafici con le medie giornaliere dei valori registrati da alcuni sensori}
   \label{fig:plots}
-\end{figure}
+\end{figure*}
 
 Nella Figura \ref{fig:plots} possiamo vedere alcuni grafici ottenuti applicando una finestra di un giorno ai dati e calcolando la media al suo interno facendola poi scorrere fino alla fine.
 
-\begin{table*}[htb]
+\begin{table}[htb]
   \centering
+  \small
   \begin{tabular}{ l l l l l }
     \hline
-    & media giorno & media notte & min/max giorno & min/max notte \\
+    & $\overline{x}$ (G) & $\overline{x}$ (N) & -/+ (G) & -/+ (N) \\
     \hline
-    temperatura DHT11 & 8.71 & 4.55 & -1.0/26.0 & -3.0/13.0 \\
-    temperatura BMP180 & 9.90 & 3.31 & -3.9/31.0 & -4.9/11.8 \\
-    umidità & 80.08 & 86.27 & 29.0/91.0 & 49.0/91.0 \\
-    pioggia\% & 11.85 & 15.57 & 1.0/96.0 & 1.0/95.0 \\
-    igrometro\% & 53.50 & 53.37 & 1.0/84.0 & 16.0/74.0 \\
-    LDR\% & 96.29 & 1.14 & 50.0/100.0 & 0.0/49.0 \\
-    MQ-135\% & 8.42 & 8.26 & 3.0/66.0 & 3.0/11.0 \\
-    pressione & 96418.27 & 96318.11 & 94689.0/98156.0 & 94608.0/98113.0 \\
-    altitudine & 417.81 & 426.47 & 267.93/568.36 & 272.12/574.61 \\
+    T-DHT11 & 8.71 & 4.55 & -1.0/26.0 & -3.0/13.0 \\
+    T-BMP180 & 9.90 & 3.31 & -3.9/31.0 & -4.9/11.8 \\
+    Umidità & 80.08 & 86.27 & 29.0/91.0 & 49.0/91.0 \\
+    Pioggia & 11.85 & 15.57 & 1.0/96.0 & 1.0/95.0 \\
+    Igrometro & 53.50 & 53.37 & 1.0/84.0 & 16.0/74.0 \\
+    Luminosità & 96.29 & 1.14 & 50.0/100.0 & 0.0/49.0 \\
+    Q.Aria & 8.42 & 8.26 & 3.0/66.0 & 3.0/11.0 \\
+    Pressione & 964 & 963 & 947/982 & 946/981 \\
+    Altitudine & 417 & 426 & 267/568 & 272/574 \\
     \hline
   \end{tabular}
-  \caption{Media dei sensori durante il giorno e la notte}
+  \caption{Valore medio $\overline{x}$, minimo ($-$) e massimo ($+$) dei valori registrati durante il giorno (G) e la notte (N)}
   \label{tab:daynight}
-\end{table*}
+\end{table}
 
-Un ulteriore analisi che si può svolgere è dividere l'intero dataset nei campioni raccolti durante il giorno e quelli durante la notte filtrando i dati a seconda del valore di LDR. 
+Un ulteriore analisi che si può svolgere è dividere l'intero dataset nei campioni raccolti durante il giorno e quelli durante la notte filtrando i dati a seconda del valore della luminosità. 
 Otteniamo 919 campioni durante il giorno (\textasciitilde39\%) e 1448 di notte (\textasciitilde61\%); la Tabella \ref{tab:daynight} riporta la media per ogni sensore.
 
-Si può vedere che la maggior parte dei sensori non variano di molto fra notte e giorno, mentre temperatura, umidità e ldr cambiano radicalmente; come previsto il valore medio 
+Si può vedere che la maggior parte dei sensori non varia di molto fra notte e giorno, mentre temperatura, umidità e luminosità cambiano radicalmente; come previsto il valore medio 
 del sensore di luminosità durante il giorno è \textasciitilde96\% mentre durante la notte è \textasciitilde1\%, stessa cosa avviene con la temperatura, che durante la notte è \textasciitilde4°C, mentre di 
 giorno aumenta fino a \textasciitilde9°C. Il valore dell'umidità invece aumenta di notte e diminuisce di giorno (da \textasciitilde86\% a \textasciitilde80\%); in seguito approfondiremo questo fenomeno parlando 
 della correlazione fra umidità e temperatura.
@@ -261,11 +262,8 @@ alcuni valori particolarmente interessanti:
   \item la correlazione fra l'umidità e le due temperature è negativa (-0.37/-0.45), questo dipende da fattori fisici per cui, all'aumentare della temperatura l'aria si riscalda e ne consegue una diminuzione dell'umidità; 
   conseguentemente al diminuire della temperatura l'ambiente si raffredda e l'umidità aumenta
   \item la correlazione fra luminosità e temperatura è positiva (0.45/0.53), tenendo a mente che il valore di luminosità indica il giorno e la notte, all'aumentare della luminosità, ovvero durante il giorno, si ha un aumento
-  della temperatura; al contrario la correlazione fra luminosità e umidità è negativa (-0.32), probabilmente questa non è da considerarsi veritiera poiché entrambe le variabili sono fortemente correlate alla temperatura e 
-  questo valore ne è influenzato
-  \item la pressione è fortemente correlata in maniera negativa con l'altitudine (-1), questo valore ci stupisce però è molto probabile che non sia corretto, infatti la pressione e l'altitudine sono calcolate
-  entrambe dal sensore BMP180, in più vediamo che entrambe le variabili sono correlate all'umidità; è quindi probabile che la pressione sia correlata all'umidità, mentre l'altitudine è calcolata erroneamente sulla base 
-  della pressione
+  della temperatura; di conseguenza l'aria si riscalda e l'umidità diminuisce (correlazione negativa -0.32). 
+  \item la pressione è totlamente correlata in maniera negativa con l'altitudine (-1), poiché il sensore in questione utilizza proprio la pressione per calcolare l'altitudine.
 \end{enumerate}
 
 \section{Rilevazione anomalie}
@@ -283,26 +281,27 @@ tutti i file necessari per l'utilizzo con Arduino, che sono poi importati come l
 dei dati di `collector.ino` con la libreria di anomaly detection creato prima; ogni 15 minuti l'ESP8266 si avvia leggendo i valori di ogni sensore ed usandoli per calcolare un "anomaly\_score" e caricando i valori di tutti i 
 sensori su InfluxBD.
 
-\begin{table*}[h!]
+\begin{table}[h!]
   \centering
+  \small
   \begin{tabular}{ l l l l l }
     \hline
      & media & std & min & max \\
     \hline
-    temperatura DHT11 & 2.81 & 4.70 & -3.0 & 18.0 \\
-    temperatura BMP180 & 2.33 & 7.16 & -4.8 & 24.8 \\
-    umidità & 86.03 & 3.14 & 64.0 & 91.0 \\
-    LDR\% & 26.25 & 43.08 & 0.0 & 100.0 \\
-    igrometro\% & 26.73 & 7.50 & 16.0 & 65.0 \\
-    pioggia\% & 2.34 & 8.21 & 1.0 & 70.0 \\
-    MQ-135\% & 7.87 & 0.47 & 3.0 & 8.0 \\
-    pressione & 97320.60 & 294.61 & 96691.0 & 97898.0 \\
-    altitudine & 339.67 & 25.26 & 290.17 & 393.59 \\
+    T-DHT11 & 2.81 & 4.70 & -3.0 & 18.0 \\
+    T-BMP180 & 2.33 & 7.16 & -4.8 & 24.8 \\
+    Umidità & 86.03 & 3.14 & 64.0 & 91.0 \\
+    Luminosità & 26.25 & 43.08 & 0.0 & 100.0 \\
+    Igrometro & 26.73 & 7.50 & 16.0 & 65.0 \\
+    Pioggia & 2.34 & 8.21 & 1.0 & 70.0 \\
+    Q.Aria & 7.87 & 0.47 & 3.0 & 8.0 \\
+    Pressione & 973 & 295 & 967 & 979 \\
+    Altitudine & 339.67 & 25.26 & 290.17 & 393.59 \\
     \hline
   \end{tabular}
   \caption{Valori statistici ricavati dai dati anomali}
   \label{tab:anomalies}
-\end{table*}
+\end{table}
 
 Il programma è stato eseguito per 7 giorni senza sosta, e al termine sono stati analizzati i dati raccolti ottenendo 734 campioni, di cui 455 anomalie (62\%) suddivise in 119(26\%) durante il giorno e 336(74\%) 
 durante la notte. Nella Tabella \ref{tab:anomalies} sono mostrati alcuni valori statistici ricavati dai dati contenenti anomalie, in particolare notiamo come la temperatura minima sia di -3/-4.8, mentre la 
@@ -324,6 +323,7 @@ più di una "Smart Box" IoT allo stesso tempo collocate in parti diverse dell'az
 Infine un aspetto da sviluppare ulteriormente è la durata della batteria, ottimizzando il power usage dei sensori o utilizzando direttamente delle batterie LiPo al posto di un power-bank.
 
 \phantomsection
-\printbibliography
+\bibliographystyle{unsrt}
+\bibliography{relazione.bib}
 
 \end{document}
