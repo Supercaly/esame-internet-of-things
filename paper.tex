@@ -7,6 +7,7 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage{biblatex}
+\usepackage{url}
 
 \setlength{\columnsep}{0.55cm} % Distance between the two columns of text
 \setlength{\fboxrule}{0.75pt} % Width of the border around the abstract
@@ -144,7 +145,8 @@ Una volta progettata la Smart Box si è passati alla fase di realizzazione: acqu
 \section{Raccolta dei dati}
 
 Per la raccolta dei dati generati dai sensori si è deciso di scrivere un programma utilizzando Arduino\cite{arduino}, popolare piattaforma open source per lo sviluppo di programmi eseguibili su micro-controllori, poiché 
-integra nativamente tutte le librerie necessarie per interagire con i sensori e con l'ESP8266. 
+integra nativamente tutte le librerie necessarie per interagire con i sensori e con l'ESP8266\footnote{Il codice sorgente è disponibile su GitHub al seguente indirizzo: 
+\url{https://github.com/Supercaly/smart_box_iot}}. 
 
 Il programma, chiamato `collector.ino`, si connette alla rete WiFi preconfigurata ad ogni avvio dell'MCU, raccoglie i dati provenienti da ogni sensore in quell'instante di tempo e li invia ad un server InfluxDB\cite{influxdb} 
 etichettati in maniera appropriata, infine sfrutta la funzionalità di Deep Sleep dell'ESP8266 per mandare l'MCU in uno stato di sonno profondo per altri 15 minuti. In questo modo sia L'ESP che i sensori sono 
