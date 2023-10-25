@@ -31,3 +31,15 @@ $ unzip iot_inferencing.zip -d path/to/arduino/libraries
 ## More info
 
 For more info about this project please read this [report](https://github.com/Supercaly/smart_sense/blob/master/relazione.pdf) or his [paper](https://github.com/Supercaly/smart_sense/blob/master/paper.pdf) version.
+
+## Cite us:
+
+```
+@manual{calisti_2022_6036183,
+  title        = {Smart Box IoT},
+  author       = {Calisti, Lorenzo and
+                  Lattanzi, Emanuele},
+  month        = feb,
+  year         = 2022,
+}
+```

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Calisti"
+  given-names: "Lorenzo"
+  orcid: "https://orcid.org/0000-0001-5958-773X"
+- family-names: "Lattanzi"
+  given-names: "Emanuele"
+  orcid: "hhttps://orcid.org/0000-0002-6568-8470"
+title: "Smart Box IoT"
+version: 2.0.4
+doi: 10.5281/zenodo.6036182
+date-released: 2022-02-10
+url: "https://zenodo.org/records/6036183"
+
